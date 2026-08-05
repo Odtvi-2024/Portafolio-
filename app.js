@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initSmoothScroll();
   initProjectFilters();
   initProjectModals();
+  initArticleModals();
   initSkillBars();
   initContactForm();
 });
@@ -231,9 +232,84 @@ function initProjectModals() {
     modal.classList.remove('active');
   });
 
+const articleDetailsData = {
+  1: {
+    category: 'Inteligencia Artificial',
+    title: 'IA Generativa en Marketing: Ética, Estrategia e Impacto Real en 2026',
+    date: 'Agosto 2026 | 5 min de lectura',
+    content: `
+      <p>La adopción de tecnologías emergentes y herramientas de Inteligencia Artificial generativa (como ChatGPT, Gemini y Midjourney) ha dejado de ser una ventaja opcional para convertirse en el pilar central de la competitividad comercial moderna.</p>
+      <h4 style="color: var(--text-primary); margin: 1.2rem 0 0.5rem 0;">1. Personalización de Servicios a Gran Escala</h4>
+      <p>El verdadero valor de la IA no reside en la automatización ciega, sino en la capacidad de estructurar y analizar patrones de comportamiento de los usuarios (a través de analítica avanzada como GA4) para personalizar ofertas, contenidos y recomendaciones en tiempo real.</p>
+      <h4 style="color: var(--text-primary); margin: 1.2rem 0 0.5rem 0;">2. Uso Ético y Responsable de los Datos</h4>
+      <p>En mi trayectoria como docente e instructor en asignaturas de IA generativa, enfatizo la importancia del marco ético. Las empresas que prioricen la transparencia y el tratamiento ético del dato generarán mayor confianza y lealtad de marca a largo plazo.</p>
+      <h4 style="color: var(--text-primary); margin: 1.2rem 0 0.5rem 0;">3. Hoja de Ruta para la Integración</h4>
+      <p>Para implementar IA generativa en marketing se requiere: auditoría de procesos comerciales existentes, capacitación transversal del equipo y la adopción de plataformas interconectadas mediante CRM (como HubSpot y Mailchimp).</p>
+    `
+  },
+  2: {
+    category: 'Transformación Digital',
+    title: 'Evaluación de Madurez Digital: Guía para diagnosticar brechas en PyMEs',
+    date: 'Julio 2026 | 6 min de lectura',
+    content: `
+      <p>Evaluar la madurez digital de una empresa implica analizar no solo la tecnología adoptada, sino la cultura organizacional, los modelos de negocio y la consistencia en la Experiencia de Usuario (UX).</p>
+      <h4 style="color: var(--text-primary); margin: 1.2rem 0 0.5rem 0;">Los 7 Pilares de la Experiencia de Usuario (UX)</h4>
+      <p>Aplicando metodologías como Design Thinking y herramientas colaborativas (Miro, Trello), identificamos si la plataforma comercial es útil, deseable, accesible, utilizable, valiosa y confiable.</p>
+      <h4 style="color: var(--text-primary); margin: 1.2rem 0 0.5rem 0;">De la Auditoría a la Rentabilidad</h4>
+      <p>Diagnosticar brechas tecnológicas permite rediseñar la estrategia de posicionamiento comercial, optimizar presupuestos y aumentar la tasa de conversión en plataformas e-commerce (Shopify, WooCommerce, Wix).</p>
+    `
+  },
+  3: {
+    category: 'Innovación Académica',
+    title: 'Formando las Competencias Digitales del Futuro: Caso AIEP 2026',
+    date: 'Junio 2026 | 4 min de lectura',
+    content: `
+      <p>Reconocido entre los "20 Docentes Innovadores 2026" a nivel institucional en AIEP, comparto la visión detrás de la integración transversal del marketing digital y la ciencia de datos en la educación superior.</p>
+      <h4 style="color: var(--text-primary); margin: 1.2rem 0 0.5rem 0;">Proyectos Prácticos y Marketplaces Reales</h4>
+      <p>Guíar a más de 80 estudiantes y emprendedores ha demostrado que el aprendizaje más efectivo ocurre al construir soluciones del mundo real, como la implementación de marketplaces digitales que conectan talento con el ecosistema productivo.</p>
+      <h4 style="color: var(--text-primary); margin: 1.2rem 0 0.5rem 0;">Vinculación con el Medio y Exportación</h4>
+      <p>Como mentor certificado en Mentor Crew (Perú 2023) y MoveIncuba, el objetivo es preparar profesionales capaces de diagnosticar necesidades del mercado global e innovar con transferencia tecnológica continua.</p>
+    `
+  }
+};
+
+function initArticleModals() {
+  const articleModal = document.getElementById('article-modal');
+  const articleCloseBtn = document.getElementById('article-modal-close');
+  const articleCtaBtn = document.getElementById('article-cta-btn');
+
+  if (!articleModal || !articleCloseBtn) return;
+
+  document.querySelectorAll('.open-article-modal').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const articleId = btn.getAttribute('data-article');
+      const data = articleDetailsData[articleId];
+
+      if (data) {
+        document.getElementById('article-cat').textContent = data.category;
+        document.getElementById('article-title').textContent = data.title;
+        document.getElementById('article-meta').textContent = `Por Luis González Monroy | ${data.date}`;
+        document.getElementById('article-body').innerHTML = data.content;
+
+        articleModal.classList.add('active');
+      }
+    });
+  });
+
+  articleCloseBtn.addEventListener('click', () => {
+    articleModal.classList.remove('active');
+  });
+
+  if (articleCtaBtn) {
+    articleCtaBtn.addEventListener('click', () => {
+      articleModal.classList.remove('active');
+    });
+  }
+
   window.addEventListener('click', (e) => {
-    if (e.target === modal) {
-      modal.classList.remove('active');
+    if (e.target === articleModal) {
+      articleModal.classList.remove('active');
     }
   });
 }

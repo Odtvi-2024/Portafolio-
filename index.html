@@ -39,6 +39,7 @@
         <li><a href="#logros" class="nav-link">Logros</a></li>
         <li><a href="#experiencia" class="nav-link">Experiencia</a></li>
         <li><a href="#proyectos" class="nav-link">Proyectos</a></li>
+        <li><a href="#blog" class="nav-link">Blog</a></li>
         <li><a href="#habilidades" class="nav-link">Habilidades</a></li>
         <li><a href="#educacion" class="nav-link">Educación</a></li>
         <li><a href="#contacto" class="nav-link">Contacto</a></li>
@@ -404,6 +405,88 @@
     </div>
   </section>
 
+  <!-- SECCIÓN BLOG & ARTÍCULOS -->
+  <section class="section-padding" id="blog">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-subtitle">Pensamiento Estratégico</span>
+        <h2 class="section-title">Artículos & Publicaciones de Innovación</h2>
+        <p class="section-desc">Análisis sobre Inteligencia Artificial aplicada, transformación digital, experiencia de usuario y tendencias en e-commerce.</p>
+      </div>
+
+      <div class="projects-grid">
+        <!-- ARTÍCULO 1 -->
+        <div class="project-card">
+          <div class="project-thumb">
+            <img src="project3.jpg" alt="IA Generativa en Marketing">
+          </div>
+          <div class="project-info">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+              <span class="project-cat">Inteligencia Artificial</span>
+              <span style="font-size: 0.75rem; color: var(--text-muted);"><i class="far fa-clock"></i> 5 min de lectura</span>
+            </div>
+            <h3 class="project-title">IA Generativa en Marketing: Ética, Estrategia e Impacto Real en 2026</h3>
+            <p class="project-desc">Cómo integrar ChatGPT, Gemini y Midjourney en los procesos comerciales y de contenidos sin perder la propuesta de valor ni la autenticidad de marca.</p>
+            <div class="project-tags">
+              <span class="tag">IA Generativa</span>
+              <span class="tag">Estrategia</span>
+              <span class="tag">Marketing Digital</span>
+            </div>
+            <a href="#" class="btn btn-primary btn-sm open-article-modal" data-article="1" style="margin-top: auto;">
+              Leer Artículo Completo <i class="fas fa-book-open"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- ARTÍCULO 2 -->
+        <div class="project-card">
+          <div class="project-thumb">
+            <img src="project1.jpg" alt="Madurez Digital">
+          </div>
+          <div class="project-info">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+              <span class="project-cat">Transformación Digital</span>
+              <span style="font-size: 0.75rem; color: var(--text-muted);"><i class="far fa-clock"></i> 6 min de lectura</span>
+            </div>
+            <h3 class="project-title">Evaluación de Madurez Digital: Guía para diagnosticar brechas en PyMEs</h3>
+            <p class="project-desc">Metodología paso a paso para estructurar hojas de ruta tecnológicas que optimicen las operaciones comerciales y la experiencia de usuario (UX).</p>
+            <div class="project-tags">
+              <span class="tag">Madurez Digital</span>
+              <span class="tag">UX / UI</span>
+              <span class="tag">Consultoría</span>
+            </div>
+            <a href="#" class="btn btn-primary btn-sm open-article-modal" data-article="2" style="margin-top: auto;">
+              Leer Artículo Completo <i class="fas fa-book-open"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- ARTÍCULO 3 -->
+        <div class="project-card">
+          <div class="project-thumb">
+            <img src="project2.jpg" alt="Educación e Innovación Académica">
+          </div>
+          <div class="project-info">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+              <span class="project-cat">Innovación Académica</span>
+              <span style="font-size: 0.75rem; color: var(--text-muted);"><i class="far fa-clock"></i> 4 min de lectura</span>
+            </div>
+            <h3 class="project-title">Formando las Competencias Digitales del Futuro: Caso AIEP 2026</h3>
+            <p class="project-desc">Reflexión sobre el diseño de asignaturas prácticas, el uso ético de la tecnología y la creación de marketplaces universitarios de impacto social.</p>
+            <div class="project-tags">
+              <span class="tag">Docencia</span>
+              <span class="tag">Marketplaces</span>
+              <span class="tag">Docente Innovador</span>
+            </div>
+            <a href="#" class="btn btn-primary btn-sm open-article-modal" data-article="3" style="margin-top: auto;">
+              Leer Artículo Completo <i class="fas fa-book-open"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- HABILIDADES & HERRAMIENTAS -->
   <section class="section-padding" id="habilidades">
     <div class="container">
@@ -725,6 +808,24 @@
       <p id="modal-desc" style="color: var(--text-secondary); margin-bottom: 1.5rem; line-height: 1.6;"></p>
       <h4 style="font-size: 1.1rem; margin-bottom: 0.8rem;">Puntos Destacados & Impacto:</h4>
       <ul id="modal-highlights" style="padding-left: 1.2rem; color: var(--text-secondary);"></ul>
+    </div>
+  </div>
+
+  <!-- MODAL LECTURA DE ARTÍCULO BLOG -->
+  <div class="modal" id="article-modal">
+    <div class="modal-content" style="max-width: 800px;">
+      <button class="modal-close" id="article-modal-close"><i class="fas fa-times"></i></button>
+      <span id="article-cat" class="project-cat">Categoría</span>
+      <h2 id="article-title" style="font-size: 1.8rem; margin: 0.5rem 0;" class="gradient-text">Título del Artículo</h2>
+      <div id="article-meta" style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1.5rem;">Por Luis González Monroy | Fecha</div>
+      <div id="article-body" style="color: var(--text-secondary); line-height: 1.8; font-size: 1rem; margin-bottom: 2rem;"></div>
+      
+      <div style="border-top: 1px solid var(--border-color); padding-top: 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+        <span style="font-weight: 600; font-size: 0.9rem;">¿Te interesa profundizar este tema para tu organización?</span>
+        <a href="#contacto" class="btn btn-primary btn-sm" id="article-cta-btn">
+          <i class="fas fa-paper-plane"></i> Contactar a Luis
+        </a>
+      </div>
     </div>
   </div>
 
