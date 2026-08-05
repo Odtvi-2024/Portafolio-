@@ -69,8 +69,9 @@ function initTypingEffect() {
   if (!typingElement) return;
 
   const phrases = [
+    'Inteligencia Artificial Agéntica & Generativa',
     'Transformación Digital & E-Commerce',
-    'Inteligencia Artificial Aplicada a Negocios',
+    'Antigravity AI & Tecnologías Emergentes',
     'Mentor de Exportación & Consultoría',
     'Docencia e Innovación Académica (AIEP)'
   ];
