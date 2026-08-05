@@ -1177,7 +1177,7 @@ textarea.form-input {
   transform: translateY(-3px);
 }
 
-/* RESPONSIVE DESIGN */
+/* RESPONSIVE DESIGN & MOBILE OPTIMIZATIONS */
 @media (max-width: 992px) {
   .hero-grid {
     grid-template-columns: 1fr;
@@ -1201,16 +1201,32 @@ textarea.form-input {
 }
 
 @media (max-width: 768px) {
+  .section-padding {
+    padding: 3.5rem 0;
+  }
+  .section-title {
+    font-size: 2rem;
+  }
+  .navbar-container {
+    height: 70px;
+  }
+  .logo-name {
+    font-size: 0.95rem;
+  }
+  .logo-sub {
+    font-size: 0.65rem;
+  }
   .nav-menu {
     position: fixed;
-    top: 80px;
+    top: 70px;
     left: -100%;
     width: 100%;
-    height: calc(100vh - 80px);
+    height: calc(100vh - 70px);
     background: var(--bg-nav);
     backdrop-filter: blur(20px);
     flex-direction: column;
     justify-content: center;
+    gap: 1.5rem;
     transition: var(--transition);
   }
   .nav-menu.active {
@@ -1219,13 +1235,83 @@ textarea.form-input {
   .menu-btn {
     display: block;
   }
-  .hero-title {
-    font-size: 2.4rem;
+  
+  /* Ajuste de botones en la cabecera */
+  .nav-actions .btn-secondary span {
+    display: none;
   }
+  .nav-actions .btn-secondary {
+    padding: 0.5rem 0.8rem;
+  }
+
+  .hero {
+    padding-top: 100px;
+    padding-bottom: 50px;
+  }
+  .hero-title {
+    font-size: 2.2rem;
+  }
+  .hero-subtitle-wrapper {
+    font-size: 1rem;
+    height: auto;
+    flex-wrap: wrap;
+    min-height: 2.5rem;
+  }
+  .typing-text {
+    white-space: normal;
+    animation: none;
+    border-right: none;
+  }
+  .hero-img {
+    height: 320px;
+  }
+
+  .info-pills {
+    grid-template-columns: 1fr;
+  }
+  
   .projects-grid, .references-grid, .education-grid {
     grid-template-columns: 1fr;
   }
   .timeline::before { left: 10px; }
   .timeline-item { padding-left: 35px; }
   .timeline-dot { left: 1px; }
+
+  /* Ajustes de Modales en Móviles */
+  .modal-content {
+    padding: 1.2rem;
+    width: 95%;
+    max-height: 90vh;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 1.8rem;
+  }
+  .hero-stats {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.6rem;
+  }
+  .stat-number {
+    font-size: 1.2rem;
+  }
+  .stat-label {
+    font-size: 0.7rem;
+  }
+  .hero-buttons {
+    flex-direction: column;
+    width: 100%;
+  }
+  .hero-buttons .btn {
+    width: 100%;
+    justify-content: center;
+  }
+  .tab-btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+  }
+  .glass-card {
+    padding: 1.2rem;
+  }
 }
