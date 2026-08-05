@@ -231,6 +231,7 @@ function initProjectModals() {
   closeBtn.addEventListener('click', () => {
     modal.classList.remove('active');
   });
+}
 
 const articleDetailsData = {
   1: {
