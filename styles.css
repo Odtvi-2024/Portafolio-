@@ -1052,6 +1052,7 @@ textarea.form-input {
   bottom: 30px;
   right: 30px;
   z-index: 2000;
+  pointer-events: none;
 }
 
 .toast {
@@ -1066,6 +1067,7 @@ textarea.form-input {
   transform: translateY(100px);
   opacity: 0;
   transition: var(--transition);
+  pointer-events: auto;
 }
 
 .toast.show {
@@ -1155,6 +1157,15 @@ textarea.form-input {
 .social-links {
   display: flex;
   gap: 1rem;
+  position: relative;
+  z-index: 1000;
+}
+
+.social-links a {
+  position: relative;
+  z-index: 1000;
+  cursor: pointer !important;
+  pointer-events: auto !important;
 }
 
 .social-icon {
