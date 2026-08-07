@@ -49,9 +49,6 @@
         <button class="theme-toggle" id="theme-toggle" aria-label="Cambiar tema">
           <i class="fas fa-sun"></i>
         </button>
-        <button class="btn btn-secondary btn-sm" onclick="window.print()">
-          <i class="fas fa-file-pdf"></i> <span>Imprimir CV</span>
-        </button>
         <button class="menu-btn" id="menu-btn" aria-label="Menú navegación">
           <i class="fas fa-bars"></i>
         </button>
@@ -151,18 +148,18 @@
             </div>
 
             <div class="info-pill-item">
-              <div class="info-icon"><i class="fas fa-envelope"></i></div>
+              <div class="info-icon"><i class="fas fa-paper-plane"></i></div>
               <div class="info-meta">
-                <span class="label">Email</span>
-                <span class="val">l.gonzalez8035@gmail.com</span>
+                <span class="label">Contacto</span>
+                <span class="val">Formulario Web</span>
               </div>
             </div>
 
             <div class="info-pill-item">
-              <div class="info-icon"><i class="fas fa-phone"></i></div>
+              <div class="info-icon"><i class="fab fa-linkedin"></i></div>
               <div class="info-meta">
-                <span class="label">Teléfono</span>
-                <span class="val">+56 9 7996 7597</span>
+                <span class="label">Red Profesional</span>
+                <span class="val">Perfil LinkedIn</span>
               </div>
             </div>
 
@@ -666,7 +663,6 @@
           <div class="ref-author">
             <span class="ref-name">Orlando Durán Sáez</span>
             <span class="ref-role">Jefe de Especialidad DAC AIEP</span>
-            <span class="ref-contact"><i class="fas fa-phone"></i> +56 9 9439 2584</span>
           </div>
         </div>
 
@@ -677,7 +673,6 @@
           <div class="ref-author">
             <span class="ref-name">Nicols Araya</span>
             <span class="ref-role">Jefa de Gestión Docente AIEP</span>
-            <span class="ref-contact"><i class="fas fa-phone"></i> +56 9 6535 1183</span>
           </div>
         </div>
 
@@ -688,7 +683,6 @@
           <div class="ref-author">
             <span class="ref-name">Katrin Klapp Oliger</span>
             <span class="ref-role">Directora Escuela de Artes Digitales UGM</span>
-            <span class="ref-contact"><i class="fas fa-envelope"></i> katrin.klapp@ugm.cl</span>
           </div>
         </div>
       </div>
@@ -704,58 +698,16 @@
         <p class="section-desc">¿Tienes un proyecto de transformación digital o deseas coordinar una consultoría/mentoría? Escríbeme.</p>
       </div>
 
-      <div class="contact-grid">
-        <!-- DETALLES DE CONTACTO -->
-        <div class="glass-card">
-          <h3 style="font-size: 1.5rem; margin-bottom: 1.5rem;" class="gradient-text">Información de Contacto</h3>
-          <p style="color: var(--text-secondary); margin-bottom: 2rem;">
-            Estoy disponible para consultorías ejecutivas, proyectos de adopción tecnológica, mentorías de exportación y cátedras académicas.
-          </p>
-
-          <div class="contact-info-list">
-            <div class="contact-item">
-              <div class="contact-icon"><i class="fas fa-envelope"></i></div>
-              <div class="contact-detail">
-                <span class="label">Correo Electrónico</span>
-                <a href="mailto:l.gonzalez8035@gmail.com" class="value">l.gonzalez8035@gmail.com</a>
-              </div>
-            </div>
-
-            <div class="contact-item">
-              <div class="contact-icon"><i class="fas fa-phone"></i></div>
-              <div class="contact-detail">
-                <span class="label">Teléfono Directo</span>
-                <a href="tel:+56979967597" class="value">+56 9 7996 7597</a>
-              </div>
-            </div>
-
-            <div class="contact-item">
-              <div class="contact-icon"><i class="fab fa-linkedin"></i></div>
-              <div class="contact-detail">
-                <span class="label">Perfil de LinkedIn</span>
-                <a href="https://www.linkedin.com/in/luis-osvaldo-gonzalez-monroy-227371a3/" target="_blank" rel="noopener" class="value">Ver Perfil en LinkedIn</a>
-              </div>
-            </div>
-
-            <div class="contact-item">
-              <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
-              <div class="contact-detail">
-                <span class="label">Ubicación</span>
-                <span class="value">Colico 7639, Las Condes, Santiago, Chile</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
+      <div style="max-width: 680px; margin: 0 auto;">
         <!-- FORMULARIO DE CONTACTO -->
         <div class="glass-card">
-          <h3 style="font-size: 1.5rem; margin-bottom: 1.5rem;">Enviar Mensaje Directo</h3>
-          <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1.2rem;">
-            Completa este formulario para enviarme un correo directamente a <strong>l.gonzalez8035@gmail.com</strong>.
+          <h3 style="font-size: 1.5rem; margin-bottom: 1rem;" class="gradient-text">Enviar Mensaje Directo</h3>
+          <p style="color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 1.5rem;">
+            Completa este formulario para enviarme una consulta de forma directa y confidencial.
           </p>
           
           <form class="contact-form" id="contact-form" action="https://api.web3forms.com/submit" method="POST">
-            <!-- Access Key de Web3Forms activa para l.gonzalez8035@gmail.com -->
+            <!-- Access Key de Web3Forms activa -->
             <input type="hidden" name="access_key" value="cc2aef30-a98b-42c9-bdfa-2da879c7ebc4" id="web3forms-key">
             <input type="hidden" name="subject" value="Nuevo Mensaje desde tu Portafolio Web - Luis González Monroy">
             <input type="hidden" name="from_name" value="Portafolio Web Contacto">
@@ -775,13 +727,10 @@
               <textarea id="form-message" name="message" class="form-input" placeholder="Escribe aquí tu mensaje..." required></textarea>
             </div>
 
-            <div style="display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; margin-top: 1rem;">
-              <button type="submit" class="btn btn-primary">
-                <i class="fas fa-paper-plane"></i> Enviar Mensaje a mi Correo
+            <div style="margin-top: 1rem;">
+              <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">
+                <i class="fas fa-paper-plane"></i> Enviar Mensaje
               </button>
-              <a href="mailto:l.gonzalez8035@gmail.com?subject=Consulta%20desde%20Portafolio%20Web" class="btn btn-secondary btn-sm" target="_blank">
-                <i class="fas fa-envelope-open"></i> Enviar usando tu app de Email
-              </a>
             </div>
           </form>
         </div>
@@ -798,12 +747,6 @@
       <div class="social-links">
         <a href="https://www.linkedin.com/in/luis-osvaldo-gonzalez-monroy-227371a3/" target="_blank" rel="noopener" class="social-icon" aria-label="LinkedIn">
           <i class="fab fa-linkedin-in"></i>
-        </a>
-        <a href="mailto:l.gonzalez8035@gmail.com" class="social-icon" aria-label="Email">
-          <i class="fas fa-envelope"></i>
-        </a>
-        <a href="tel:+56979967597" class="social-icon" aria-label="Teléfono">
-          <i class="fas fa-phone"></i>
         </a>
       </div>
     </div>
