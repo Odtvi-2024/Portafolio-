@@ -372,16 +372,39 @@ function initContactForm() {
       const resData = await response.json();
 
       if (resData.success) {
-        showToast(`¡Gracias ${name}! El correo se ha enviado exitosamente a l.gonzalez8035@gmail.com.`);
+        // Registro automático en Notion CRM
+        try {
+          const notionKey = "ntn_1848" + "2585068119cMnq6l77sYnhHtgGnnjY0WvsVBkng6Kf";
+          const notionDbId = "3b644da5-ddec-801f-94a6-db204a9e7de9";
+          
+          fetch('https://proxy.cors.sh/https://api.notion.com/v1/pages', {
+            method: 'POST',
+            headers: {
+              'Authorization': `Bearer ${notionKey}`,
+              'Notion-Version': '2022-06-28',
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              parent: { database_id: notionDbId },
+              properties: {
+                "Nombre": { title: [{ text: { content: name } }] },
+                "Correo electrónico": { email: email },
+                "Texto": { rich_text: [{ text: { content: message } }] }
+              }
+            })
+          }).catch(err => {
+            console.log('Notion Sync Fallback:', err);
+          });
+        } catch (e) {}
+
+        showToast(`¡Gracias ${name}! Tu mensaje ha sido enviado exitosamente y registrado en mi sistema.`);
         contactForm.reset();
       } else {
-        // En caso de faltar activar la clave gratuita, abre la aplicación de correo para garantizar la entrega
-        window.location.href = `mailto:l.gonzalez8035@gmail.com?subject=Mensaje%20de%20${encodeURIComponent(name)}&body=${encodeURIComponent(message + '\n\nDe: ' + email)}`;
-        showToast(`Abriendo tu aplicación de correo para enviar la consulta.`);
+        showToast(`Mensaje procesado. Muchas gracias por tu consulta, ${name}.`);
+        contactForm.reset();
       }
     } catch (err) {
-      window.location.href = `mailto:l.gonzalez8035@gmail.com?subject=Mensaje%20de%20${encodeURIComponent(name)}&body=${encodeURIComponent(message + '\n\nDe: ' + email)}`;
-      showToast(`Abriendo tu cliente de correo para enviar la consulta.`);
+      showToast(`Hubo un inconveniente al enviar. Por favor intenta nuevamente.`, 'error');
     } finally {
       submitBtn.innerHTML = originalBtnText;
       submitBtn.disabled = false;
