@@ -272,6 +272,21 @@ const articleDetailsData = {
       <h4 style="color: var(--text-primary); margin: 1.2rem 0 0.5rem 0;">Vinculación con el Medio y Exportación</h4>
       <p>Como mentor certificado en Mentor Crew (Perú 2023) y MoveIncuba, el objetivo es preparar profesionales capaces de diagnosticar necesidades del mercado global e innovar con transferencia tecnológica continua.</p>
     `
+  },
+  4: {
+    category: 'Inteligencia Artificial',
+    title: 'La Inteligencia Artificial necesita filósofos',
+    date: 'Agosto 2026 | 5 min de lectura',
+    content: `
+      <p>Mientras más inteligentes son nuestras máquinas, más necesitamos reflexionar sobre nuestra propia inteligencia, nuestros valores y nuestras decisiones.</p>
+      <h4 style="color: var(--text-primary); margin: 1.2rem 0 0.5rem 0;">La Pregunta Humana en la Era Digital</h4>
+      <p>La Inteligencia Artificial puede ayudarnos a encontrar respuestas rápidas y procesar volúmenes masivos de datos. Pero seguirá dependiendo de nosotros definir cuáles son las preguntas verdaderamente importantes.</p>
+      <h4 style="color: var(--text-primary); margin: 1.2rem 0 0.5rem 0;">Pensar Profundamente como Ventaja Competitiva</h4>
+      <blockquote style="border-left: 4px solid var(--accent-cyan); padding-left: 1rem; margin: 1.2rem 0; font-style: italic; color: var(--text-primary);">
+        "En la era de las máquinas inteligentes, una de las habilidades más valiosas seguirá siendo pensar profundamente."
+      </blockquote>
+      <p>Y por eso, en pleno siglo XXI, la filosofía vuelve a entrar al centro de la conversación tecnológica y de la transformación digital.</p>
+    `
   }
 };
 
@@ -417,6 +432,23 @@ function initArticleModals() {
   const articleCtaBtn = document.getElementById('article-cta-btn');
 
   if (!articleModal || !articleCloseBtn) return;
+
+  document.querySelectorAll('.open-article-modal').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const articleId = btn.getAttribute('data-article');
+      const data = articleDetailsData[articleId];
+
+      if (data) {
+        document.getElementById('article-cat').textContent = data.category;
+        document.getElementById('article-title').textContent = data.title;
+        document.getElementById('article-meta').textContent = `Por Luis González Monroy | ${data.date}`;
+        document.getElementById('article-body').innerHTML = data.content;
+
+        articleModal.classList.add('active');
+      }
+    });
+  });
 
   articleCloseBtn.addEventListener('click', () => {
     articleModal.classList.remove('active');
