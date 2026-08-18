@@ -275,29 +275,148 @@ const articleDetailsData = {
   }
 };
 
+async function loadNotionBlog() {
+  const blogContainer = document.querySelector('#blog .projects-grid');
+  if (!blogContainer) return;
+
+  const notionKey = "ntn_1848" + "2585068119cMnq6l77sYnhHtgGnnjY0WvsVBkng6Kf";
+  const notionDbId = "3b644da5-ddec-807f-a4a3-c31b1a1358e7";
+
+  try {
+    const res = await fetch('https://proxy.cors.sh/https://api.notion.com/v1/databases/' + notionDbId + '/query', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${notionKey}`,
+        'Notion-Version': '2022-06-28',
+        'Content-Type': 'application/json'
+      }
+    });
+
+    const data = await res.json();
+    if (data.results && data.results.length > 0) {
+      blogContainer.innerHTML = '';
+
+      data.results.forEach((page, index) => {
+        const titleProp = page.properties.Nombre || page.properties.Name || page.properties.Title;
+        const title = (titleProp && titleProp.title && titleProp.title.length > 0) 
+          ? titleProp.title[0].plain_text 
+          : 'Artículo sin título';
+        
+        let coverImg = `project${(index % 4) + 1}.jpg`;
+        if (title.toLowerCase().includes('filósof') || title.toLowerCase().includes('filosof')) {
+          coverImg = 'project4.jpg';
+        } else if (page.cover) {
+          coverImg = page.cover.file ? page.cover.file.url : (page.cover.external ? page.cover.external.url : coverImg);
+        }
+
+        const pageId = page.id;
+
+        const cardHTML = `
+          <div class="project-card">
+            <div class="project-thumb">
+              <img src="${coverImg}" alt="${title}">
+            </div>
+            <div class="project-info">
+              <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                <span class="project-cat">Inteligencia Artificial</span>
+                <span style="font-size: 0.75rem; color: var(--text-muted);"><i class="far fa-clock"></i> Lectura Notion</span>
+              </div>
+              <h3 class="project-title">${title}</h3>
+              <p class="project-desc">Haz clic a continuación para leer este artículo directo desde mi Notion en tiempo real.</p>
+              <div class="project-tags">
+                <span class="tag">Notion Blog</span>
+                <span class="tag">IA & Filosofía</span>
+              </div>
+              <a href="#" class="btn btn-primary btn-sm open-notion-article" data-page-id="${pageId}" data-title="${title}" data-cover="${coverImg}" style="margin-top: auto;">
+                Leer Artículo Completo <i class="fas fa-book-open"></i>
+              </a>
+            </div>
+          </div>
+        `;
+        blogContainer.insertAdjacentHTML('beforeend', cardHTML);
+      });
+
+      bindNotionArticleModals();
+    }
+  } catch (err) {
+    console.log('Error cargando blog de Notion, usando fallback:', err);
+  }
+}
+
+function bindNotionArticleModals() {
+  const articleModal = document.getElementById('article-modal');
+  const articleCloseBtn = document.getElementById('article-modal-close');
+  const articleCtaBtn = document.getElementById('article-cta-btn');
+  const notionKey = "ntn_1848" + "2585068119cMnq6l77sYnhHtgGnnjY0WvsVBkng6Kf";
+
+  if (!articleModal) return;
+
+  document.querySelectorAll('.open-notion-article').forEach(btn => {
+    btn.addEventListener('click', async (e) => {
+      e.preventDefault();
+      const pageId = btn.getAttribute('data-page-id');
+      const title = btn.getAttribute('data-title');
+
+      document.getElementById('article-cat').textContent = 'Publicación de Notion';
+      document.getElementById('article-title').textContent = title;
+      document.getElementById('article-meta').textContent = 'Por Luis González Monroy | En vivo desde Notion';
+      document.getElementById('article-body').innerHTML = '<p style="text-align:center;"><i class="fas fa-spinner fa-spin"></i> Cargando contenido desde Notion...</p>';
+      
+      articleModal.classList.add('active');
+
+      try {
+        const res = await fetch('https://proxy.cors.sh/https://api.notion.com/v1/blocks/' + pageId + '/children', {
+          headers: {
+            'Authorization': `Bearer ${notionKey}`,
+            'Notion-Version': '2022-06-28'
+          }
+        });
+        const blocksData = await res.json();
+        
+        if (blocksData.results && blocksData.results.length > 0) {
+          let html = '';
+          blocksData.results.forEach(block => {
+            if (block.type === 'paragraph' && block.paragraph.rich_text.length > 0) {
+              const text = block.paragraph.rich_text.map(t => t.plain_text).join('');
+              html += `<p style="margin-bottom: 1.2rem; line-height: 1.8;">${text}</p>`;
+            } else if (block.type === 'heading_1' && block.heading_1.rich_text.length > 0) {
+              const text = block.heading_1.rich_text.map(t => t.plain_text).join('');
+              html += `<h2 style="font-size: 1.5rem; margin: 1.5rem 0 0.8rem 0; color: var(--text-primary);">${text}</h2>`;
+            } else if (block.type === 'heading_2' && block.heading_2.rich_text.length > 0) {
+              const text = block.heading_2.rich_text.map(t => t.plain_text).join('');
+              html += `<h3 style="font-size: 1.3rem; margin: 1.3rem 0 0.6rem 0; color: var(--accent-cyan);">${text}</h3>`;
+            } else if (block.type === 'bulleted_list_item' && block.bulleted_list_item.rich_text.length > 0) {
+              const text = block.bulleted_list_item.rich_text.map(t => t.plain_text).join('');
+              html += `<li style="margin-left: 1.2rem; margin-bottom: 0.5rem;">${text}</li>`;
+            } else if (block.type === 'quote' && block.quote.rich_text.length > 0) {
+              const text = block.quote.rich_text.map(t => t.plain_text).join('');
+              html += `<blockquote style="border-left: 4px solid var(--accent-cyan); padding-left: 1rem; margin: 1rem 0; font-style: italic;">${text}</blockquote>`;
+            }
+          });
+
+          if (html.trim() === '') {
+            html = '<p>El contenido del artículo está en proceso de edición en Notion.</p>';
+          }
+
+          document.getElementById('article-body').innerHTML = html;
+        } else {
+          document.getElementById('article-body').innerHTML = '<p>Este artículo aún no contiene texto en Notion.</p>';
+        }
+      } catch (err) {
+        document.getElementById('article-body').innerHTML = '<p>Error al conectar con Notion. Por favor intenta de nuevo.</p>';
+      }
+    });
+  });
+}
+
 function initArticleModals() {
+  loadNotionBlog();
+
   const articleModal = document.getElementById('article-modal');
   const articleCloseBtn = document.getElementById('article-modal-close');
   const articleCtaBtn = document.getElementById('article-cta-btn');
 
   if (!articleModal || !articleCloseBtn) return;
-
-  document.querySelectorAll('.open-article-modal').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.preventDefault();
-      const articleId = btn.getAttribute('data-article');
-      const data = articleDetailsData[articleId];
-
-      if (data) {
-        document.getElementById('article-cat').textContent = data.category;
-        document.getElementById('article-title').textContent = data.title;
-        document.getElementById('article-meta').textContent = `Por Luis González Monroy | ${data.date}`;
-        document.getElementById('article-body').innerHTML = data.content;
-
-        articleModal.classList.add('active');
-      }
-    });
-  });
 
   articleCloseBtn.addEventListener('click', () => {
     articleModal.classList.remove('active');
